@@ -43,12 +43,21 @@ public class Postjdbc {
 
                 // Commit the transaction
                 conn.commit();
+                
+                // Closing the jdbc resources
+                stmt.close();
+                conn.close();
                 System.out.println("All Transaction committed successfully.");
             } catch (SQLException e) {
                 // Rollback in case of any errors
                 if (conn != null) {
                     try {
                         conn.rollback();
+                        
+                        // Closing the jdbc resources
+                        stmt.close();
+                        conn.close();
+                        
                         System.out.println("Transaction rolled back due to an error.");
                     } catch (SQLException rollbackEx) {
                         rollbackEx.printStackTrace();
